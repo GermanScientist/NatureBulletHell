@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public Vector2 CalculateForce(Vector2 _currentVelocity, float _speed, float _acceleration, float _deceleration) {
         Vector2 desiredVelocity = transform.rotation * direction * _speed; //Calculate the desiredVelocity
-        Vector2 force = (desiredVelocity - _currentVelocity*_deceleration) * _acceleration; //Calculate the force the player requires to reach it's desired velocity
+        Vector2 force = (desiredVelocity - _currentVelocity * _deceleration) * _acceleration; //Calculate the force the player requires to reach it's desired velocity
         
         return force.normalized; //Return the normalized force, to make sure the player doesn't move faster diagonally
     }
