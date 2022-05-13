@@ -3406,9 +3406,7 @@ MonoBehaviour:
   maxMovementSpeed: 20
   acceleration: 0.6
   deceleration: 10
-  bulletSpawnDistance: 3
-  bulletSpeed: 30
-  bulletPrefab: {fileID: 2548083342309864290, guid: 3e02083226de71d4f8261ae81786c941, type: 3}
+  projectile: {fileID: 11400000, guid: 6c2850443fb7a3a4fbc628c6104e435d, type: 2}
 --- !u!50 &921916575
 Rigidbody2D:
   serializedVersion: 4

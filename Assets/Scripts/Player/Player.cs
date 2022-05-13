@@ -9,10 +9,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float maxMovementSpeed = 5f;
     [SerializeField] private float acceleration = 0.01f;
     [SerializeField] private float deceleration = 2f;
-    [SerializeField] private float bulletSpawnDistance = 3f;
-    [SerializeField] private float bulletSpeed = 5f;
-    
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Projectile projectile;
     
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
@@ -62,10 +59,10 @@ public class Player : MonoBehaviour {
     }
 
     private void FireProjectile() {
-        Vector3 pos = transform.position;
-        GameObject projectile = Instantiate(bulletPrefab, new Vector3(pos.x, pos.y, -1) + mouseDirection*bulletSpawnDistance, Quaternion.identity);
-        Rigidbody2D projectileRigidbody = projectile.AddComponent<Rigidbody2D>();
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -1) + mouseDirection * projectile.bulletSpawnDistance;
+        GameObject bullet = Instantiate(projectile.prefab, spawnPosition, Quaternion.LookRotation(mouseDirection));
+        Rigidbody2D projectileRigidbody = bullet.AddComponent<Rigidbody2D>();
         projectileRigidbody.gravityScale = 0;
-        projectileRigidbody.velocity = mouseDirection.normalized * bulletSpeed;
+        projectileRigidbody.velocity = bullet.transform.forward * projectile.speed;
     }
 }
