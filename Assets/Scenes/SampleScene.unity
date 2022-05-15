@@ -3403,9 +3403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a30d7b2e39e030458f9a02944d918db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMovementSpeed: 20
-  acceleration: 0.6
-  deceleration: 10
+  maxMovementSpeed: 30
+  acceleration: 25
+  deceleration: 20
   projectile: {fileID: 11400000, guid: 6c2850443fb7a3a4fbc628c6104e435d, type: 2}
 --- !u!50 &921916575
 Rigidbody2D:
@@ -4309,7 +4309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174825785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1833527016}
