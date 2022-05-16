@@ -10,10 +10,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void UpdatePlayerDirection() {
-        //Gives a value between -1 and 1
-        float horizontalDirection = Input.GetAxisRaw("Horizontal"); //-1 is left
-        float verticalDirection = Input.GetAxisRaw("Vertical"); //-1 is down
-        
+        float horizontalDirection = Input.GetAxisRaw("Horizontal"); //-1 is left, 1 is right
+        float verticalDirection = Input.GetAxisRaw("Vertical"); //-1 is down, 1 is up
+
         direction = new Vector2(horizontalDirection, verticalDirection);
     }
 
