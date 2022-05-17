@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Enemy : Actor {
     [SerializeField] protected float fireRate = 1f;
 
-    protected Vector3 aimDirection;
+    protected Vector3 playerDirection;
     protected Transform playerTransform;
 
     protected override void Start() {
@@ -15,16 +15,16 @@ public abstract class Enemy : Actor {
         InvokeRepeating("AttackPlayer", 0, fireRate);
     }
 
-    private void Update() {
+    protected virtual void Update() {
         AimAtPlayer();
     }
 
     protected void AimAtPlayer() {
-        aimDirection = (playerTransform.position - this.transform.position).normalized;
+        playerDirection = (playerTransform.position - this.transform.position).normalized;
     }
 
     protected virtual void ChasePlayer() {
-
+        Move(movementSpeed, playerDirection);
     }
 
     protected virtual void AttackPlayer() {

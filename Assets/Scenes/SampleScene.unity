@@ -1660,9 +1660,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43905300bacbbe4d89f314ccc9c828a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 35
+  movementSpeed: 4
   collisionOffset: 0.05
-  maxHitpoints: 20
+  maxHitpoints: 7
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -2414,7 +2414,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5628,9 +5628,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabb636c5ca71904489a6b9d29393da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 2
   collisionOffset: 0.05
-  maxHitpoints: 30
+  maxHitpoints: 4
   movementFilter:
     useTriggers: 0
     useLayerMask: 0

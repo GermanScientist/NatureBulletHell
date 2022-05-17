@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chimora : Enemy {
-    protected override void ChasePlayer() {
-
+    protected override void Update() {
+        base.Update();
+        ChasePlayer();
     }
 
     protected override void AttackPlayer() {
-        weapon.FireEnemyProjectile(aimDirection);
+        weapon.FireEnemyProjectile(playerDirection);
     }
 }
