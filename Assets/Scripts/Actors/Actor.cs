@@ -17,7 +17,6 @@ public abstract class Actor : MonoBehaviour {
     public ContactFilter2D movementFilter;
     protected Vector2 moveDirection;
 
-
     public int Hitpoints { get { return currentHitpoints; } }
 
     protected virtual void Start() {
