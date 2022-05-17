@@ -57,7 +57,7 @@ public class Player : MonoBehaviour {
         if (weapon.CurrentAmmo <= 0) return;
         if (!Input.GetMouseButtonDown(0)) return;
        
-        weapon.FireProjectile(mouseDirection); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
+        weapon.FireFriendlyProjectile(mouseDirection); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
     }
 
     public void Damage(int _damageAmount) {

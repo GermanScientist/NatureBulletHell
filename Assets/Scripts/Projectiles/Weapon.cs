@@ -13,13 +13,25 @@ public class Weapon : MonoBehaviour {
         currentAmmo = projectileStats.maxAmmo;
     }
 
-    public void FireProjectile(Vector3 _direction) {
+    public void FireFriendlyProjectile(Vector3 _direction) {
         //The spawn position will be dependant of the direction the player is aiming
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -1) + _direction * projectileStats.projectileSpawnDistance;
 
         //Instantiate a bullet using the information from the player's projectile scriptableobject
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(_direction));
-        Projectile p = projectile.AddComponent<Projectile>();
+        FriendlyProjectile p = projectile.AddComponent<FriendlyProjectile>();
+        p.ProjectileStats = projectileStats;
+
+        currentAmmo--; //Update the ammo acount
+    }
+
+    public void FireEnemyProjectile(Vector3 _direction) {
+        //The spawn position will be dependant of the direction the player is aiming
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -1) + _direction * projectileStats.projectileSpawnDistance;
+
+        //Instantiate a bullet using the information from the player's projectile scriptableobject
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(_direction));
+        EnemyProjectile p = projectile.AddComponent<EnemyProjectile>();
         p.ProjectileStats = projectileStats;
 
         currentAmmo--; //Update the ammo acount

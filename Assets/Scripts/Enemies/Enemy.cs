@@ -20,6 +20,7 @@ public abstract class Enemy : MonoBehaviour {
 
     public void Damage(int _damageAmount) {
         currentHitpoints -= _damageAmount;
+        Debug.Log("hit");
     }
 
     protected void AimAtPlayer() {
