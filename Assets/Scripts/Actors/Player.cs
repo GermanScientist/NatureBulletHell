@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
 public class Player : Actor {    
-    private PlayerMovement playerMovement;
 
     private Vector3 mousePosition;
     private Vector3 mouseDirection;
@@ -12,25 +10,32 @@ public class Player : Actor {
     protected override void Start() {
         base.Start();
 
-        playerMovement = GetComponent<PlayerMovement>();
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update() {
-        GetAimDirection();
+        UpdatePlayerDirection();
+        UpdateAimDirection();
         CheckToFire();
     }
 
     private void FixedUpdate() {
-        playerMovement.MovePlayer(movementSpeed);
+        Move(movementSpeed, moveDirection);
     }
 
-    private void GetAimDirection() {
+    private void UpdateAimDirection() {
         mousePosition = Input.mousePosition;
         mousePosition.z = 0;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         mouseDirection = (mousePosition - this.transform.position).normalized;
+    }
+
+    private void UpdatePlayerDirection() {
+        float horizontalDirection = Input.GetAxisRaw("Horizontal"); //-1 is left, 1 is right
+        float verticalDirection = Input.GetAxisRaw("Vertical"); //-1 is down, 1 is up
+
+        moveDirection = new Vector2(horizontalDirection, verticalDirection);
     }
 
     private void CheckToFire() {

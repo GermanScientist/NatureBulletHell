@@ -1660,8 +1660,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43905300bacbbe4d89f314ccc9c828a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitpoints: 20
   movementSpeed: 35
+  collisionOffset: 0.05
+  maxHitpoints: 20
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   fireRate: 0.8
 --- !u!1 &302849343
 GameObject:
@@ -3479,7 +3494,6 @@ GameObject:
   - component: {fileID: 921916572}
   - component: {fileID: 921916574}
   - component: {fileID: 921916578}
-  - component: {fileID: 921916576}
   - component: {fileID: 921916575}
   - component: {fileID: 921916577}
   m_Layer: 0
@@ -3568,10 +3582,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a30d7b2e39e030458f9a02944d918db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitpoints: 100
-  maxMovementSpeed: 5
-  acceleration: 7
-  deceleration: 5
+  movementSpeed: 5
+  collisionOffset: 0.05
+  maxHitpoints: 30
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!50 &921916575
 Rigidbody2D:
   serializedVersion: 4
@@ -3593,33 +3620,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &921916576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921916571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fade648658cdd4ca370f95cc4a7aac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  collisionOffset: 0.001
 --- !u!61 &921916577
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5221,6 +5221,7 @@ GameObject:
   - component: {fileID: 1395305385}
   - component: {fileID: 1395305381}
   - component: {fileID: 1395305380}
+  - component: {fileID: 1395305382}
   m_Layer: 0
   m_Name: Ent
   m_TagString: Enemy
@@ -5275,6 +5276,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1395305382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395305379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb3d59d04744f247b6ffe6b27fb6016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  projectileStats: {fileID: 0}
 --- !u!212 &1395305383
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5353,8 +5368,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428660954cb6dd945b7fc160e4580aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitpoints: 100
   movementSpeed: 0
+  collisionOffset: 0.05
+  maxHitpoints: 100
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   fireRate: 0
 --- !u!1 &1407154382
 GameObject:
@@ -5598,8 +5628,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabb636c5ca71904489a6b9d29393da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitpoints: 30
   movementSpeed: 5
+  collisionOffset: 0.05
+  maxHitpoints: 30
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   fireRate: 0.5
 --- !u!1 &1438817291
 GameObject:
