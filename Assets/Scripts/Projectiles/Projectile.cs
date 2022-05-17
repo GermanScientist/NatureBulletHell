@@ -12,26 +12,21 @@ public abstract class Projectile : MonoBehaviour {
     private void Start() {
         //Remove the bullet's gravity and shoot the bullet towards the direction of the mouse when the bullet was fired
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
-        rb.velocity = transform.forward * projectileStats.projectileSpeed;
+        rb.isKinematic = true;
 
-        gameObject.AddComponent<CircleCollider2D>();
+        gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
         gameObject.tag = "Bullet";
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
-    public virtual void OnCollisionEnter2D(Collision2D _other) {
-        if (_other.gameObject.tag == "Bullet" || _other.gameObject.tag == "Player") {
-            IgnoreCollision(_other);
-        }
+    private void FixedUpdate() {
+        rb.MovePosition(transform.position + transform.forward*projectileStats.projectileSpeed);
+    }
 
+    public virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.gameObject.tag == "Wall") {
             Destroy(gameObject);
         }
-    }
-
-    protected void IgnoreCollision(Collision2D _collisionToIgnore) {
-        Collider2D otherCollider = _collisionToIgnore.gameObject.GetComponent<Collider2D>();
-        Collider2D collider = GetComponent<Collider2D>();
-        Physics2D.IgnoreCollision(otherCollider, collider);
     }
 }

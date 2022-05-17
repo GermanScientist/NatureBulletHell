@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyProjectile : Projectile {
-    public override void OnCollisionEnter2D(Collision2D _other) {
+    public override void OnTriggerEnter2D(Collider2D _other) {
         if (_other.gameObject.tag == "Bullet" || _other.gameObject.tag == "Enemy") {
-            IgnoreCollision(_other);
         }
 
         if (_other.gameObject.tag == "Player") {

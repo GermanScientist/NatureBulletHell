@@ -15,7 +15,7 @@ public abstract class Enemy : MonoBehaviour {
     public int Hitpoints { get { return currentHitpoints; } }
 
     private void Start() {
-        
+        GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
     public void Damage(int _damageAmount) {

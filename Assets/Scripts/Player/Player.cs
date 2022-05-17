@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        rb.isKinematic = true;
         playerMovement = GetComponent<PlayerMovement>();
 
         Cursor.lockState = CursorLockMode.Confined;
@@ -36,13 +37,7 @@ public class Player : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        AddMovementForce();
-    }
-
-    private void AddMovementForce() {
-        //Calculate the force for the desired movement speed
-        Vector2 force = playerMovement.CalculateForce(rb.velocity, maxMovementSpeed, acceleration, deceleration);
-        rb.AddForce(force, ForceMode2D.Force);
+        playerMovement.MovePlayer(maxMovementSpeed);
     }
 
     private void GetAimDirection() {
