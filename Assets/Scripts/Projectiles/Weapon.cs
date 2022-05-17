@@ -10,7 +10,8 @@ public class Weapon : MonoBehaviour {
     public int CurrentAmmo { get { return currentAmmo; } }
 
     private void Start() {
-        currentAmmo = projectileStats.maxAmmo;
+        if (projectileStats != null)
+            currentAmmo = projectileStats.maxAmmo;
     }
 
     public void FireFriendlyProjectile(Vector3 _direction) {

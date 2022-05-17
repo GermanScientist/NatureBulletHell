@@ -3,32 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour {
-    [SerializeField] private int maxHitpoints = 100;
-    [SerializeField] private float maxMovementSpeed = 5f;
-    [SerializeField] private float acceleration = 0.01f;
-    [SerializeField] private float deceleration = 2f;
-    
-    private Weapon weapon;
-    
-    private Rigidbody2D rb;
+public class Player : Actor {    
     private PlayerMovement playerMovement;
 
     private Vector3 mousePosition;
     private Vector3 mouseDirection;
 
-    private int currentHitpoints;
+    protected override void Start() {
+        base.Start();
 
-    public int Hitpoints {  get { return currentHitpoints; }  }
-
-    private void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = true;
         playerMovement = GetComponent<PlayerMovement>();
-
         Cursor.lockState = CursorLockMode.Confined;
-        weapon = GetComponent<Weapon>();
     }
 
     private void Update() {
@@ -37,7 +22,7 @@ public class Player : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        playerMovement.MovePlayer(maxMovementSpeed);
+        playerMovement.MovePlayer(movementSpeed);
     }
 
     private void GetAimDirection() {
@@ -55,7 +40,7 @@ public class Player : MonoBehaviour {
         weapon.FireFriendlyProjectile(mouseDirection); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
     }
 
-    public void Damage(int _damageAmount) {
-        currentHitpoints -= _damageAmount;
+    protected override void Die() {
+        gameObject.SetActive(false);
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c905ddfecd0076041b6166ef27d40088, type: 3}
   m_Name: MothProjectile
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2548083342309864290, guid: be90b633a790def42ba6e654b15596aa, type: 3}
-  speed: 20
-  damage: 1
-  bulletSpawnDistance: 3
+  maxAmmo: 20
+  projectileDamage: 1
+  projectileSpeed: 0.1
+  projectileSpawnDistance: 0.9
