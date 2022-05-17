@@ -21,7 +21,7 @@ public abstract class Projectile : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rb.MovePosition(transform.position + transform.forward*projectileStats.projectileSpeed);
+        rb.MovePosition(transform.position + transform.up*projectileStats.projectileSpeed);
     }
 
     public virtual void OnTriggerEnter2D(Collider2D _other) {

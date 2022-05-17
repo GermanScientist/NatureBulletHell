@@ -8,6 +8,6 @@ public class Moth : Enemy {
     }
 
     protected override void AttackPlayer() {
-
+        weapon.FireEnemyProjectile(aimDirection);
     }
 }

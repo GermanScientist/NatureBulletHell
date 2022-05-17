@@ -8,6 +8,6 @@ public class Chimora : Enemy {
     }
 
     protected override void AttackPlayer() {
-
+        weapon.FireEnemyProjectile(aimDirection);
     }
 }

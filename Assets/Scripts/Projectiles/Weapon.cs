@@ -19,6 +19,12 @@ public class Weapon : MonoBehaviour {
 
         //Instantiate a bullet using the information from the player's projectile scriptableobject
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(_direction));
+        
+        //Calculate the rotation of the bullet
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+        
+        //Add the projectile component
         FriendlyProjectile p = projectile.AddComponent<FriendlyProjectile>();
         p.ProjectileStats = projectileStats;
 
@@ -31,6 +37,12 @@ public class Weapon : MonoBehaviour {
 
         //Instantiate a bullet using the information from the player's projectile scriptableobject
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(_direction));
+        
+        //Calculate the rotation of the bullet
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
+
+        //Add the projectile component
         EnemyProjectile p = projectile.AddComponent<EnemyProjectile>();
         p.ProjectileStats = projectileStats;
 
