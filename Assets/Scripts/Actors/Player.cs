@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Actor {    
 
     private Vector3 mousePosition;
     private Vector3 mouseDirection;
 
+    private Text ammoText;
+    private Text healthText;
+
     protected override void Start() {
         base.Start();
 
         Cursor.lockState = CursorLockMode.Confined;
+        
+        ammoText = GameObject.Find("AmmoCount").GetComponent<Text>();
+        ammoText.text = weapon.CurrentAmmo.ToString();
+
+        healthText = GameObject.Find("HealthCount").GetComponent<Text>();
+        healthText.text = currentHitpoints.ToString();
     }
 
     private void Update() {
@@ -43,6 +53,12 @@ public class Player : Actor {
         if (!Input.GetMouseButtonDown(0)) return;
        
         weapon.FireFriendlyProjectile(mouseDirection); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
+        ammoText.text = weapon.CurrentAmmo.ToString();
+    }
+
+    public override void Damage(int _damageAmount) {
+        base.Damage(_damageAmount);
+        healthText.text = currentHitpoints.ToString();
     }
 
     protected override void Die() {

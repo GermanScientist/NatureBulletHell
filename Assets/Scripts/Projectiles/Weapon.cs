@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour {
 
     public int CurrentAmmo { get { return currentAmmo; } }
 
-    private void Start() {
+    private void Awake() {
         if (projectileStats != null)
             currentAmmo = projectileStats.maxAmmo;
     }

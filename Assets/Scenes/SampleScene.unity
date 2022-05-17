@@ -5517,7 +5517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0
   collisionOffset: 0.05
-  maxHitpoints: 100
+  maxHitpoints: 30
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
