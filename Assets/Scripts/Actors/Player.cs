@@ -9,7 +9,7 @@ public class Player : Actor {
     private Vector3 mouseDirection;
 
     private Text ammoText;
-    private Text healthText;
+    private Slider healthbar;
 
     protected override void Start() {
         base.Start();
@@ -19,8 +19,8 @@ public class Player : Actor {
         ammoText = GameObject.Find("AmmoCount").GetComponent<Text>();
         ammoText.text = weapon.CurrentAmmo.ToString();
 
-        healthText = GameObject.Find("HealthCount").GetComponent<Text>();
-        healthText.text = currentHitpoints.ToString();
+        healthbar = GameObject.Find("Healthbar").GetComponent<Slider>();
+        healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
     }
 
     private void Update() {
@@ -58,7 +58,7 @@ public class Player : Actor {
 
     public override void Damage(int _damageAmount) {
         base.Damage(_damageAmount);
-        healthText.text = currentHitpoints.ToString();
+        healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
     }
 
     protected override void Die() {
