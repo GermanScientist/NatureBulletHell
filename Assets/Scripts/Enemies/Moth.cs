@@ -9,6 +9,6 @@ public class Moth : Enemy {
     }
 
     protected override void AttackPlayer() {
-        weapon.FireEnemyProjectile(playerDirection);
+        weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position);
     }
 }

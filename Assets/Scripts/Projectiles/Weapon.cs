@@ -15,8 +15,8 @@ public class Weapon : MonoBehaviour {
             currentAmmo = projectileStats.maxAmmo;
     }
 
-    public void FireFriendlyProjectile(Vector3 _direction) {
-        GameObject projectile = CreateProjectile(_direction);
+    public void FireFriendlyProjectile(Vector3 _direction, Vector3 _spawnPosition) {
+        GameObject projectile = CreateProjectile(_direction, _spawnPosition);
 
         //Add the projectile component
         FriendlyProjectile p = projectile.AddComponent<FriendlyProjectile>();
@@ -27,8 +27,8 @@ public class Weapon : MonoBehaviour {
 
     }
 
-    public void FireEnemyProjectile(Vector3 _direction) {
-        GameObject projectile = CreateProjectile(_direction);
+    public void FireEnemyProjectile(Vector3 _direction, Vector3 _spawnPosition) {
+        GameObject projectile = CreateProjectile(_direction, _spawnPosition);
 
         //Add the projectile component
         EnemyProjectile p = projectile.AddComponent<EnemyProjectile>();
@@ -37,9 +37,10 @@ public class Weapon : MonoBehaviour {
         currentAmmo--; //Update the ammo acount
     }
 
-    private GameObject CreateProjectile(Vector3 _direction) {
+    private GameObject CreateProjectile(Vector3 _direction, Vector3 _spawnPosition) {
         //The spawn position will be dependant of the direction the player is aiming
-        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -1) + _direction * projectileStats.projectileSpawnDistance;
+        Vector3 spawnPosition = new Vector3(_spawnPosition.x, _spawnPosition.y, _spawnPosition.z) + _direction * projectileStats.projectileSpawnDistance;
+        spawnPosition.z = -1;
 
         //Instantiate a bullet using the information from the player's projectile scriptableobject
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(_direction));

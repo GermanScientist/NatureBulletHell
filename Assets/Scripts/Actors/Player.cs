@@ -38,7 +38,7 @@ public class Player : Actor {
         mousePosition.z = 0;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        mouseDirection = (mousePosition - this.transform.position).normalized;
+        mouseDirection = (mousePosition - projectileSpawn.position).normalized;
     }
 
     private void UpdatePlayerDirection() {
@@ -52,7 +52,7 @@ public class Player : Actor {
         if (weapon.CurrentAmmo <= 0) return;
         if (!Input.GetMouseButtonDown(0)) return;
        
-        weapon.FireFriendlyProjectile(mouseDirection); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
+        weapon.FireFriendlyProjectile(mouseDirection, projectileSpawn.position); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
         ammoText.text = weapon.CurrentAmmo.ToString();
     }
 

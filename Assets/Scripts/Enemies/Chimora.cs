@@ -9,6 +9,6 @@ public class Chimora : Enemy {
     }
 
     protected override void AttackPlayer() {
-        weapon.FireEnemyProjectile(playerDirection);
+        weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position);
     }
 }

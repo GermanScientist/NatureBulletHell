@@ -16,6 +16,7 @@ public abstract class Actor : MonoBehaviour {
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public ContactFilter2D movementFilter;
     protected Vector2 moveDirection;
+    protected Transform projectileSpawn;
 
     public int Hitpoints { get { return currentHitpoints; } }
 
@@ -26,6 +27,7 @@ public abstract class Actor : MonoBehaviour {
         weapon = GetComponent<Weapon>();
 
         currentHitpoints = maxHitpoints;
+        projectileSpawn = transform.GetChild(0).transform;
     }
 
     protected void Move(float _speed, Vector2 _direction) {

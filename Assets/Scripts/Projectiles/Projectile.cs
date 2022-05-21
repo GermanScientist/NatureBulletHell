@@ -16,8 +16,6 @@ public abstract class Projectile : MonoBehaviour {
 
         gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
         gameObject.tag = "Bullet";
-
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     private void FixedUpdate() {

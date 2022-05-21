@@ -15,4 +15,4 @@ MonoBehaviour:
   maxAmmo: 20
   projectileDamage: 1
   projectileSpeed: 0.1
-  projectileSpawnDistance: 0.9
+  projectileSpawnDistance: 0
