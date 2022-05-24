@@ -7,6 +7,6 @@ public class GridTest : MonoBehaviour {
     [SerializeField] Vector2 origin;
     
     private void Start() {
-        Grid grid = new Grid(x, y, w, origin);
+        Pathfinding pathfinding = new Pathfinding(x, y, w, origin);
     }
 }
