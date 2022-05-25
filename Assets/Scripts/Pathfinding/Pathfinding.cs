@@ -5,10 +5,6 @@ using UnityEngine;
 public class Pathfinding {
     private const int STRAIGHTCOST = 10;
     private const int DIAGONALCOST = 14;
-
-    private int width;
-    private int height;
-    private int cellSize;
     private Vector2 origin;
 
     private Grid<PathNode> grid;
@@ -16,12 +12,8 @@ public class Pathfinding {
     private List<PathNode> closedList;
 
     public Pathfinding(int _width, int _height, int _cellSize, Vector2 _origin) {
-        this.width = _width;
-        this.height = _height;
-        this.cellSize = _cellSize;
-        this.origin = _origin;
 
-        grid = new Grid<PathNode>(width, height, cellSize, origin,
+        grid = new Grid<PathNode>(_width, _height, _cellSize, _origin,
             (Grid<PathNode> _grid, int _x, int _y) => new PathNode(_grid, _x, _y));
     }
 
@@ -77,6 +69,22 @@ public class Pathfinding {
 
         //No more nodes in the open list
         return null;
+    }
+
+    public List<Vector2> FindPath(Vector2 startWorldPosition, Vector2 endWorldPosition) {
+        grid.GetXY(startWorldPosition, out int startX, out int startY);
+        grid.GetXY(endWorldPosition, out int endX, out int endY);
+
+        List<PathNode> path = FindPath(startX, startY, endX, endY);
+        if (path == null) {
+            return null;
+        } else {
+            List<Vector2> vectorPath = new List<Vector2>();
+            foreach (PathNode pathNode in path) {
+                vectorPath.Add(new Vector2(pathNode.X, pathNode.Y) * grid.CellSize + Vector2.one * grid.CellSize * .5f);
+            }
+            return vectorPath;
+        }
     }
 
     private List<PathNode> GetNeighborList(PathNode _currentNode) {
