@@ -3,16 +3,38 @@ using System.Collections;
 
 public class Node : IHeapItem<Node> {
 	
-	public bool walkable;
-	public Vector2 worldPosition;
-	public int gridX;
-	public int gridY;
+	private bool walkable;
+	private int gridX;
+	private int gridY;
 
-	public int gCost;
-	public int hCost;
-	public Node parent;
-	int heapIndex;
-	
+	private int gCost;
+	private int hCost;
+	private int heapIndex;
+
+	private Vector2 worldPosition;
+	private Node parent;
+
+	public Vector2 GridVector { get { return new Vector2(gridX, gridY); } }
+	public Vector2 WorldPosition { get { return worldPosition; } }
+	public bool Walkable { get { return walkable; } }
+	public int HCost { set { hCost = value; } }
+	public int fCost { get { return gCost + hCost; } }
+
+	public int GCost { 
+		get { return gCost; } 
+		set { gCost = value; } 
+	}
+
+	public int HeapIndex {
+		get { return heapIndex; }
+		set { heapIndex = value; }
+	}
+
+	public Node Parent { 
+		get { return parent; } 
+		set { parent = value; } 
+	}
+
 	public Node(bool _walkable, Vector2 _worldPos, int _gridX, int _gridY) {
 		walkable = _walkable;
 		worldPosition = _worldPos;
@@ -20,26 +42,10 @@ public class Node : IHeapItem<Node> {
 		gridY = _gridY;
 	}
 
-	public int fCost {
-		get {
-			return gCost + hCost;
-		}
-	}
-
-	public int HeapIndex {
-		get {
-			return heapIndex;
-		}
-		set {
-			heapIndex = value;
-		}
-	}
-
-	public int CompareTo(Node nodeToCompare) {
-		int compare = fCost.CompareTo(nodeToCompare.fCost);
-		if (compare == 0) {
-			compare = hCost.CompareTo(nodeToCompare.hCost);
-		}
+	public int CompareTo(Node _nodeToCompare) {
+		int compare = fCost.CompareTo(_nodeToCompare.fCost);
+		if (compare == 0) compare = hCost.CompareTo(_nodeToCompare.hCost);
+		
 		return -compare;
 	}
 }

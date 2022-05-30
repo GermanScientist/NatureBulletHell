@@ -2,21 +2,21 @@
 using System.Collections;
 
 public class Unit : MonoBehaviour {
-	
-	public Transform target;
-	public float speed = 20;
 
-	Vector2[] path;
-	int targetIndex;
+	private Vector2[] path;
+	private int targetIndex;
+
+	[SerializeField] private Transform target;
+	[SerializeField] private float speed = 20;
 
 
-	void Start() {
+	private void Start() {
 		path = Pathfinding.RequestPath(transform.position, target.position);
 		StopCoroutine("FollowPath");
 		StartCoroutine("FollowPath");
 	}
 
-	IEnumerator FollowPath() {
+	private IEnumerator FollowPath() {
 		Vector2 currentWaypoint = path[0];
 
 		while (true) {
@@ -28,7 +28,8 @@ public class Unit : MonoBehaviour {
 				currentWaypoint = path[targetIndex];
 			}
 
-			transform.position = Vector2.MoveTowards(transform.position,currentWaypoint,speed * Time.deltaTime);
+			transform.position = Vector2.MoveTowards(transform.position, currentWaypoint,
+				speed * Time.deltaTime);
 			yield return null;
 
 		}
