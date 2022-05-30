@@ -20,6 +20,11 @@ public class Pathfinding {
     private List<PathNode> FindPath(int _startX, int _startY, int _endX, int _endY) {
         PathNode startNode = grid.GetGridObject(_startX, _startY);
         PathNode endNode = grid.GetGridObject(_endX, _endY);
+        Debug.Log("s+e node" + startNode + " , " + endNode);
+
+        if(startNode == null || endNode == null) {
+            return null;
+        }
         
         openList = new List<PathNode> { startNode }; //Add startNode to openList
         closedList = new List<PathNode>(); //closedList remains empty
@@ -27,7 +32,7 @@ public class Pathfinding {
         for (int x = 0; x < grid.Width; x++) {
             for (int y = 0; y < grid.Height; y++) {
                 PathNode currentNode = grid.GetGridObject(x, y);
-                currentNode.gCost = int.MaxValue;
+                currentNode.gCost = 999999;
                 currentNode.CalculateFCost();
                 currentNode.previousNode = null; //Make the the node doesn't contain any data from the previous path
             }
@@ -56,7 +61,7 @@ public class Pathfinding {
                 int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighborNode);
 
                 //Check if we have a better path, if so, update it
-                if(tentativeGCost < currentNode.gCost) {
+                if(tentativeGCost < neighborNode.gCost) {
                     neighborNode.previousNode = currentNode;
                     neighborNode.gCost = tentativeGCost;
                     neighborNode.hCost = CalculateDistanceCost(neighborNode, endNode);
@@ -74,11 +79,15 @@ public class Pathfinding {
     public List<Vector2> FindPath(Vector2 startWorldPosition, Vector2 endWorldPosition) {
         grid.GetXY(startWorldPosition, out int startX, out int startY);
         grid.GetXY(endWorldPosition, out int endX, out int endY);
+        Debug.Log("Step1");
 
         List<PathNode> path = FindPath(startX, startY, endX, endY);
+        Debug.Log(startX + " , " + startY + " , " + endX + " , " + endY);
         if (path == null) {
+            Debug.Log("Path not found");
             return null;
         } else {
+            Debug.Log("Path found");
             List<Vector2> vectorPath = new List<Vector2>();
             foreach (PathNode pathNode in path) {
                 vectorPath.Add(new Vector2(pathNode.X, pathNode.Y) * grid.CellSize + Vector2.one * grid.CellSize * .5f);

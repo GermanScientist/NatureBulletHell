@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathfindMover : MonoBehaviour {
 
-    private const float speed = 40f;
+    private const float speed = 2f;
     private int currentPathIndex;
     private List<Vector2> pathVectorList;
     [SerializeField] private Transform target;
@@ -15,18 +15,20 @@ public class PathfindMover : MonoBehaviour {
     protected Rigidbody2D rb;
 
     private void Start() {
-        target = GameObject.Find("Mover").transform;
+        target = GameObject.Find("Target").transform;
         pathfinding = GameObject.Find("Grid").GetComponent<GridTest>().pathfinding;
 
         rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;
 
         SetTargetPosition(target.position);
-        InvokeRepeating("FindPath", 0, 5f);
+        HandleMovement();
+        InvokeRepeating("FindPath", 0, 1f);
     }
 
-    private void FixedUpdate() {
-        Move(2, moveDirection);
+    private void Update() {
+        //Move(2, moveDirection);
+        transform.position = (Vector2)transform.position + moveDirection * speed * Time.deltaTime;
     }
 
     private void FindPath() {
@@ -35,11 +37,14 @@ public class PathfindMover : MonoBehaviour {
     }
 
     private void HandleMovement() {
+        Debug.Log(pathVectorList);
         if (pathVectorList != null) {
-            Vector3 targetPosition = pathVectorList[currentPathIndex];
+            Vector2 targetPosition = pathVectorList[currentPathIndex];
             Debug.Log(Vector2.Distance(transform.position, targetPosition));
             if (Vector2.Distance(transform.position, targetPosition) > .01f) {
-                moveDirection = (targetPosition - transform.position).normalized;
+                moveDirection = (targetPosition - (Vector2)transform.position).normalized;
+                float distanceBefore = Vector2.Distance(transform.position, targetPosition);
+                
             } else {
                 currentPathIndex++;
                 if (currentPathIndex >= pathVectorList.Count) {
