@@ -1,53 +1,91 @@
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 
-public class Grid<GridObject> {
-    private int width;
-    private int height;
-    private int cellSize;
-    private Vector2 origin;
-    private GridObject[,] gridArray;
+public class Grid : MonoBehaviour {
 
-    public int Width { get { return width; } }
-    public int Height { get { return height; } }
-    public int CellSize { get { return cellSize; } }
+	public bool displayGridGizmos;
 
-    public Grid(int _width, int _height, int _cellSize, Vector2 _origin, 
-            Func<Grid<GridObject>, int, int, GridObject> _createGridObject) {
-        this.width = _width;
-        this.height = _height;
-        this.cellSize = _cellSize;
-        this.origin = _origin;
-        gridArray = new GridObject[width, height];
+	public LayerMask unwalkableMask;
+	public Vector2 gridWorldSize;
+	public float nodeRadius;
 
-        CreateGrid(_createGridObject);
-    }
+	Node[,] grid;
+	float nodeDiameter;
+	int gridSizeX, gridSizeY;
 
-    private void CreateGrid(Func<Grid<GridObject>, int, int, GridObject> _createGridObject) { //Passes in a function returning the grid, x and y
-        //Cycle through the multi-dimensional array
-        for (int x = 0; x < gridArray.GetLength(0); x++) {
-            for (int y = 0; y < gridArray.GetLength(1); y++) {
-                gridArray[x, y] = _createGridObject(this, x, y);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.red, 100);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.red, 100);
-            }
-        }
-    }
+	void Awake() {
+		nodeDiameter = nodeRadius*2;
+		gridSizeX = Mathf.RoundToInt(gridWorldSize.x/nodeDiameter);
+		gridSizeY = Mathf.RoundToInt(gridWorldSize.y/nodeDiameter);
 
-    private Vector2 GetWorldPosition(int _x, int _y) {
-        return new Vector2(_x, _y) * cellSize + origin;
-    }
+		CreateGrid();
+	}
 
-    public GridObject GetGridObject(int _x, int _y) {
-        if (_x >= 0 && _y >= 0 && _x < width && _y < height) 
-            return gridArray[_x, _y];
-        return default(GridObject);
-    }
+	public int MaxSize {
+		get {
+			return gridSizeX * gridSizeY;
+		}
+	}
 
-    public void GetXY(Vector2 worldPosition, out int x, out int y) {
-        x = Mathf.FloorToInt((worldPosition - origin).x / cellSize);
-        y = Mathf.FloorToInt((worldPosition - origin).y / cellSize);
-    }
+	void CreateGrid() {
+		grid = new Node[gridSizeX,gridSizeY];
+		Vector2 worldBottomLeft = (Vector2)transform.position - Vector2.right * gridWorldSize.x/2 - Vector2.up * gridWorldSize.y/2;
+
+		for (int x = 0; x < gridSizeX; x ++) {
+			for (int y = 0; y < gridSizeY; y ++) {
+				Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
+				bool walkable = (Physics2D.OverlapCircle(worldPoint,nodeRadius,unwalkableMask) == null); // if no collider2D is returned by overlap circle, then this node is walkable
+
+				grid[x,y] = new Node(walkable,worldPoint, x,y);
+			}
+		}
+	}
+	
+
+	public List<Node> GetNeighbours(Node node, int depth = 1) {
+		List<Node> neighbours = new List<Node>();
+
+		for (int x = -depth; x <= depth; x++) {
+			for (int y = -depth; y <= depth; y++) {
+				if (x == 0 && y == 0)
+					continue;
+
+				int checkX = node.gridX + x;
+				int checkY = node.gridY + y;
+
+				if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY) {
+					neighbours.Add(grid[checkX,checkY]);
+				}
+			}
+		}
+
+		return neighbours;
+	}
+	
+
+	public Node NodeFromWorldPoint(Vector2 worldPosition) {
+		float percentX = (worldPosition.x + gridWorldSize.x/2) / gridWorldSize.x;
+		float percentY = (worldPosition.y + gridWorldSize.y/2) / gridWorldSize.y;
+		percentX = Mathf.Clamp01(percentX);
+		percentY = Mathf.Clamp01(percentY);
+
+		int x = Mathf.RoundToInt((gridSizeX-1) * percentX);
+		int y = Mathf.RoundToInt((gridSizeY-1) * percentY);
+		return grid[x,y];
+	}
+	
+	void OnDrawGizmos() {
+		Gizmos.DrawWireCube(transform.position,new Vector2(gridWorldSize.x,gridWorldSize.y));
+		if (grid != null && displayGridGizmos) {
+			foreach (Node n in grid) {
+				Gizmos.color = Color.red;
+				if (n.walkable)
+					Gizmos.color = Color.white;
+
+				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter-.1f));
+			}
+		}
+	}
+
 }
