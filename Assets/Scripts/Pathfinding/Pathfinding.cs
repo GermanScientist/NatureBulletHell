@@ -29,7 +29,7 @@ public class Pathfinding : MonoBehaviour {
 		Node targetNode = grid.NodeFromWorldPoint(_toPath);
 		startNode.Parent = startNode;
 		
-		if (startNode.Walkable && targetNode.Walkable) {
+		if (targetNode.Walkable) {
 			Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
 			HashSet<Node> closedSet = new HashSet<Node>();
 			openSet.Add(startNode);
@@ -63,8 +63,7 @@ public class Pathfinding : MonoBehaviour {
 			}
 		}
 
-		if (pathSuccess)
-			waypoints = RetracePath(startNode,targetNode);
+		if (pathSuccess) waypoints = RetracePath(startNode,targetNode);
 
 		return waypoints;
 	}

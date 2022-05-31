@@ -11,6 +11,10 @@ public class Unit : MonoBehaviour {
 
 
 	private void Start() {
+		InvokeRepeating("ChaseTarget", 0, .5f);
+	}
+
+	private void ChaseTarget() {
 		path = Pathfinding.RequestPath(transform.position, target.position);
 		StopCoroutine("FollowPath");
 		StartCoroutine("FollowPath");
@@ -23,6 +27,8 @@ public class Unit : MonoBehaviour {
 			if ((Vector2)transform.position == currentWaypoint) {
 				targetIndex ++;
 				if (targetIndex >= path.Length) {
+					targetIndex = 0;
+					path = new Vector2[0];
 					yield break;
 				}
 				currentWaypoint = path[targetIndex];
