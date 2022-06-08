@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour {
 
 
 	private void Start() {
+		target = GameObject.FindGameObjectWithTag("Player").transform;
 		InvokeRepeating("ChaseTarget", 0, .5f);
 	}
 
