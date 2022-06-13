@@ -235,7 +235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ce66ebd29db9d4fb57d66b1f4cffde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms:
+  gridWidth: 5
+  gridHeight: 5
+  cellSize: 70
+  numberOfRooms: 15
+  roomPrefabs:
   - {fileID: 5043300177793943247, guid: 7dfaa74dbeae1f6468dfb01decbf05a2, type: 3}
   - {fileID: 557927367736691564, guid: 01d3d3d522feac347a3b463594d0cc80, type: 3}
   - {fileID: 3189180578940573996, guid: fb007fa14290cea4b980d63acbb8f367, type: 3}

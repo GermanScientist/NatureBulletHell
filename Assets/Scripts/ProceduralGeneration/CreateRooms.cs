@@ -5,18 +5,24 @@ using UnityEngine;
 public class CreateRooms : MonoBehaviour {
     [SerializeField] private int gridWidth;
     [SerializeField] private int gridHeight;
+    [SerializeField] private int cellSize;
     [SerializeField] private int numberOfRooms;
-    [SerializeField] private List<GameObject> rooms;
+    [SerializeField] private List<GameObject> roomPrefabs;
+
+    public int CellSize { get { return cellSize; } }
 
     private void Start() {
-        CreateAllRooms();
+        //CreateAllRooms();
+        //GenerateDungeon();
+        DepthFirstSearch();
     }
 
-    private void GenerateRooms() {
+    private void GenerateDungeon() {
         //TODO:
         //SPAWN ROOM
-        GameObject roomGO = Instantiate(rooms[15 - 1]);
-        roomGO.transform.position = new Vector3(0, 0, 100);
+        bool[] firstRoomExits = new bool[4];
+        firstRoomExits[0] = false; firstRoomExits[1] = false; firstRoomExits[2] = true; firstRoomExits[3] = true;
+        new Room(0, 0, firstRoomExits, this);
         //GET FIRST AVAILABLE ROOM WITH UNCONNECTED OPENINGS
         //TELL ROOM TO SPAWN ADJACENT ROOMS
         //WAIT UNTIL ROOMS SPAWNED
@@ -25,16 +31,31 @@ public class CreateRooms : MonoBehaviour {
     }
 
     private void CreateAllRooms() {
-        Vector3 position = new Vector3(0, 0, 100);
-        foreach (GameObject room in rooms) {
-            GameObject roomObject = Instantiate(room);
-            roomObject.transform.position = position;
+        Vector2 position = new Vector2(0, 0);
+        foreach (GameObject room in roomPrefabs) {
+            SpawnRoom(room, position);
 
-            position.x += 70;
-            if (position.x == 70 * 5) {
+            position.x += cellSize;
+            if (position.x == cellSize * gridWidth) {
                 position.x = 0;
-                position.y += 70;
+                position.y += cellSize;
             }
         }
+    }
+
+    private void DepthFirstSearch() {
+        //PERFORM DEPTH FIRST SEARCH TO CREATE DUNGEON LAYOUT
+
+        GenerateDungeon();
+    }
+
+    public void SpawnRoom(int _roomType, Vector2 _position) {
+        GameObject roomObject = Instantiate(roomPrefabs[_roomType-1]);
+        roomObject.transform.position = new Vector3(_position.x, _position.y, 100);
+    }
+
+    public void SpawnRoom(GameObject _room, Vector2 _position) {
+        GameObject roomObject = Instantiate(_room);
+        roomObject.transform.position = new Vector3(_position.x, _position.y, 100); ;
     }
 }
