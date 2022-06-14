@@ -11,11 +11,12 @@ public class Unit : MonoBehaviour {
 
 
 	private void Start() {
-		target = GameObject.FindGameObjectWithTag("Player").transform;
+		target = GameObject.Find("Player").transform;
 		InvokeRepeating("ChaseTarget", 0, .5f);
 	}
 
 	private void ChaseTarget() {
+		if(target == null) target = GameObject.Find("Player").transform;
 		path = Pathfinding.RequestPath(transform.position, target.position);
 		StopCoroutine("FollowPath");
 		StartCoroutine("FollowPath");
