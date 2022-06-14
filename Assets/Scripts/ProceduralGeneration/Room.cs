@@ -6,6 +6,7 @@ public class Room {
     private int x;
     private int y;
     private bool[] exits; //Top - bottom - left - right
+    private CreateRooms roomGenerator;
 
     public int X { get { return x; } }
     public int Y { get { return y; } }
@@ -16,12 +17,15 @@ public class Room {
         this.x = _x;
         this.y = _y;
         this.exits = _exits;
+        this.roomGenerator = _roomGenerator;
+    }
 
+    public void Spawn() {
         int roomType = 0;
         if (exits[0]) roomType += 1;
         if (exits[1]) roomType += 2;
         if (exits[2]) roomType += 4;
         if (exits[3]) roomType += 8;
-        _roomGenerator.SpawnRoom(roomType, new Vector2(x * _roomGenerator.CellSize, y * _roomGenerator.CellSize));
+        roomGenerator.SpawnRoom(roomType, new Vector2(x * roomGenerator.CellSize, y * roomGenerator.CellSize));
     }
 }
