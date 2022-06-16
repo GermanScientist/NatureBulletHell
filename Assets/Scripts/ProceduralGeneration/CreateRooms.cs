@@ -93,6 +93,13 @@ public class CreateRooms : MonoBehaviour {
         CreateGrid();
         IterateThroughRooms(); //This method will take care of the layout and the types of rooms that will spawn
         GenerateDungeon(); //This method actually spawns them using the information from the previous method
+
+        StartCoroutine(CreatePathfindingGrid());
+    }
+
+    private IEnumerator CreatePathfindingGrid() {
+        yield return new WaitForSeconds(1);
+        GameObject.Find("Pathfinding").GetComponent<Grid>().CreateGrid();
     }
 
     //Check whether the cell has any neighbors that hasn't been visited yet
