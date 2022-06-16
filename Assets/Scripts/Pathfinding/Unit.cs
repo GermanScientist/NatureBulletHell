@@ -17,9 +17,11 @@ public class Unit : MonoBehaviour {
 
 	private void ChaseTarget() {
 		if(target == null) target = GameObject.Find("Player").transform;
-		path = Pathfinding.RequestPath(transform.position, target.position);
-		StopCoroutine("FollowPath");
-		StartCoroutine("FollowPath");
+		if(Vector2.Distance(transform.position, target.position) < 100) {
+			path = Pathfinding.RequestPath(transform.position, target.position);
+			StopCoroutine("FollowPath");
+			StartCoroutine("FollowPath");
+		}
 	}
 
 	private IEnumerator FollowPath() {
