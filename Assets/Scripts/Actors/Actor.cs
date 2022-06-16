@@ -17,6 +17,7 @@ public abstract class Actor : MonoBehaviour {
     public ContactFilter2D movementFilter;
     protected Vector2 moveDirection;
     protected Transform projectileSpawn;
+    protected Vector2 currentSpeed;
 
     public int Hitpoints { get { return currentHitpoints; } }
 
@@ -31,8 +32,11 @@ public abstract class Actor : MonoBehaviour {
     }
 
     protected void Move(float _speed, Vector2 _direction) {
-        Vector2 speed = new Vector2(_direction.x * _speed, _direction.y * _speed);
-        speed.Normalize();
+        currentSpeed = new Vector2(_direction.x * _speed, _direction.y * _speed);
+        currentSpeed.Normalize();
+        if (currentSpeed.x > 0.5f) GetComponent<SpriteRenderer>().flipX = false;
+        if (currentSpeed.x < -0.5f) GetComponent<SpriteRenderer>().flipX = true;
+        Debug.Log(currentSpeed);
 
         bool succes = CheckToMove(_direction, _speed); //Try to move, move if there is no collision
         if (!succes) { //If there is no collision, allowing the player to move...

@@ -12,6 +12,8 @@ public class Player : Actor {
     private Text ammoText;
     private Slider healthbar;
 
+    private Animator animator;
+
     protected override void Start() {
         base.Start();
 
@@ -22,6 +24,8 @@ public class Player : Actor {
 
         healthbar = GameObject.Find("Healthbar").GetComponent<Slider>();
         healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update() {
@@ -32,6 +36,9 @@ public class Player : Actor {
 
     private void FixedUpdate() {
         Move(movementSpeed, moveDirection);
+        animator.SetInteger("Vertical", (int)(currentSpeed.y * 100));
+        if (currentSpeed == Vector2.zero) animator.speed = 0;
+        else animator.speed = .5f;
     }
 
     private void UpdateAimDirection() {
