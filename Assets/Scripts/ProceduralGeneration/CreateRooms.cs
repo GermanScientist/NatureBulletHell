@@ -98,7 +98,7 @@ public class CreateRooms : MonoBehaviour {
     }
 
     private IEnumerator CreatePathfindingGrid() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.3f);
         GameObject.Find("Pathfinding").GetComponent<Grid>().CreateGrid();
     }
 
