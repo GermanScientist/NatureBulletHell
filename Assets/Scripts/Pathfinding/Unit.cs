@@ -5,6 +5,7 @@ public class Unit : MonoBehaviour {
 
 	private Vector2[] path;
 	private int targetIndex;
+	private Vector2 direction;
 
 	[SerializeField] private Transform target;
 	[SerializeField] private float speed = 20;
@@ -17,7 +18,7 @@ public class Unit : MonoBehaviour {
 
 	private void ChaseTarget() {
 		if(target == null) target = GameObject.Find("Player").transform;
-		if(Vector2.Distance(transform.position, target.position) < 100) {
+		if(Vector2.Distance(transform.position, target.position) < 40) {
 			path = Pathfinding.RequestPath(transform.position, target.position);
 			StopCoroutine("FollowPath");
 			StartCoroutine("FollowPath");
@@ -38,8 +39,8 @@ public class Unit : MonoBehaviour {
 				currentWaypoint = path[targetIndex];
 			}
 
-			transform.position = Vector2.MoveTowards(transform.position, currentWaypoint,
-				speed * Time.deltaTime);
+			transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+
 			yield return null;
 
 		}

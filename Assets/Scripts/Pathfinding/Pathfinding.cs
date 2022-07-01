@@ -7,9 +7,11 @@ using System;
 public class Pathfinding : MonoBehaviour {
 
 	private Grid grid;
+	private Transform target;
 	private static Pathfinding instance;
 	
 	private void Awake() {
+		target = GameObject.Find("Player").transform;
 		grid = GetComponent<Grid>();
 		instance = this;
 	}
@@ -47,13 +49,13 @@ public class Pathfinding : MonoBehaviour {
 				
 				foreach (Node neighbour in grid.GetNeighbours(currentNode)) {
 					if (!neighbour.Walkable || closedSet.Contains(neighbour)) continue;
-					
+
 					int newMovementCostToNeighbour = currentNode.GCost + GetDistance(currentNode, neighbour)+TurningCost(currentNode, neighbour);
 					if (newMovementCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour)) {
 						neighbour.GCost = newMovementCostToNeighbour;
 						neighbour.HCost = GetDistance(neighbour, targetNode);
 						neighbour.Parent = currentNode;
-						
+
 						if (!openSet.Contains(neighbour)) 
 							openSet.Add(neighbour);
 						else 

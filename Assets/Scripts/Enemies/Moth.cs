@@ -9,7 +9,7 @@ public class Moth : Enemy {
     }
 
     protected override void AttackPlayer() {
-        if (Vector2.Distance(transform.position, playerTransform.position) < 10)
+        if (Vector2.Distance(transform.position, playerTransform.position) < 8)
             weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position);
     }
 }
