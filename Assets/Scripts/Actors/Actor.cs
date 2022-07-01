@@ -20,6 +20,7 @@ public abstract class Actor : MonoBehaviour {
     protected Vector2 currentSpeed;
 
     public int Hitpoints { get { return currentHitpoints; } }
+    public Weapon Weapon { get { return weapon; } }
 
     protected virtual void Start() {
         rb = GetComponent<Rigidbody2D>();

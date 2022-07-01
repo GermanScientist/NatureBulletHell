@@ -69,6 +69,12 @@ public class Player : Actor {
         healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
     }
 
+    public void Heal(int _healAmount) {
+        currentHitpoints += _healAmount;
+        currentHitpoints = Mathf.Clamp(currentHitpoints, 0, maxHitpoints);
+        healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
+    }
+
     protected override void Die() {
         SceneManager.LoadScene("MainMenu");
     }

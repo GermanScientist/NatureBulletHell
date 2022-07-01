@@ -23,8 +23,6 @@ public class Weapon : MonoBehaviour {
         p.ProjectileStats = projectileStats;
 
         currentAmmo--; //Update the ammo acount
-
-
     }
 
     public void FireEnemyProjectile(Vector3 _direction, Vector3 _spawnPosition) {
@@ -50,5 +48,10 @@ public class Weapon : MonoBehaviour {
         projectile.transform.rotation = Quaternion.AngleAxis(angle - 90f, Vector3.forward);
 
         return projectile;
+    }
+
+    public void AddAmmo(int _ammoAMount) {
+        currentAmmo += _ammoAMount;
+        GameObject.Find("AmmoCount").GetComponent<Text>().text = currentAmmo.ToString();
     }
 }
