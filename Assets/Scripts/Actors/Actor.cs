@@ -8,6 +8,7 @@ public abstract class Actor : MonoBehaviour {
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float collisionOffset = 0.05f;
     [SerializeField] protected int maxHitpoints;
+    [SerializeField] protected Color flickerColor;
     
     protected int currentHitpoints;
 
@@ -67,5 +68,13 @@ public abstract class Actor : MonoBehaviour {
     public virtual void Damage(int _damageAmount) {
         currentHitpoints -= _damageAmount;
         if (currentHitpoints <= 0) Die();
+        
+        StartCoroutine(Flicker(.1f));
+    }
+
+    private IEnumerator Flicker(float _seconds) {
+        gameObject.GetComponent<SpriteRenderer>().color = flickerColor;
+        yield return new WaitForSeconds(_seconds);
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

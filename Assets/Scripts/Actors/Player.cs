@@ -13,6 +13,7 @@ public class Player : Actor {
     private Slider healthbar;
 
     private Animator animator;
+    private CameraShake cameraShake;
 
     protected override void Start() {
         base.Start();
@@ -26,6 +27,7 @@ public class Player : Actor {
         healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
 
         animator = GetComponent<Animator>();
+        cameraShake = Camera.main.gameObject.GetComponent<CameraShake>();
     }
 
     private void Update() {
@@ -59,14 +61,16 @@ public class Player : Actor {
     private void CheckToFire() {
         if (weapon.CurrentAmmo <= 0) return;
         if (!Input.GetMouseButtonDown(0)) return;
-       
+
         weapon.FireFriendlyProjectile(mouseDirection, projectileSpawn.position); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
         ammoText.text = weapon.CurrentAmmo.ToString();
+        StartCoroutine(cameraShake.Shake(.1f, .15f));
     }
 
     public override void Damage(int _damageAmount) {
         base.Damage(_damageAmount);
         healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
+        StartCoroutine(cameraShake.Shake(.30f, .20f));
     }
 
     public void Heal(int _healAmount) {

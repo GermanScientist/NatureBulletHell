@@ -104,6 +104,7 @@ MonoBehaviour:
   movementSpeed: 2
   collisionOffset: 0.05
   maxHitpoints: 4
+  flickerColor: {r: 1, g: 0.64705884, b: 0.64705884, a: 1}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
