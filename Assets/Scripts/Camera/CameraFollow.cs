@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour {
     [SerializeField] private Vector3 offset;
     [SerializeField] private float smoothTime = .25f;
+    [SerializeField] private float mouseDirectionAmplifier = 4.3f;
     private Vector3 velocity = Vector3.zero;
 
     [SerializeField] private Transform target;
@@ -18,6 +19,6 @@ public class CameraFollow : MonoBehaviour {
     private void Update() {
         Vector3 targetPosition = target.position + offset;
         transform.position = Vector3.SmoothDamp(transform.position, 
-            targetPosition + (player.MouseDirection*4), ref velocity, smoothTime);
+            targetPosition + (player.MouseDirection*mouseDirectionAmplifier), ref velocity, smoothTime);
     }
 }

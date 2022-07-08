@@ -121,7 +121,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   fireRate: 0.35
   chaseDistance: 40
-  fireRange: 8
+  fireRange: 15
   hoverDistance: 1
 --- !u!114 &5695662099166449104
 MonoBehaviour:

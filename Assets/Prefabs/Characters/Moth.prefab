@@ -151,8 +151,11 @@ MonoBehaviour:
     maxNormalAngle: 0
   fireRate: 0.5
   chaseDistance: 40
-  fireRange: 9.5
+  fireRange: 12
   hoverDistance: 8.5
+  shotgunPallets: 4
+  palletAngle: 9
+  palletCone: 35
 --- !u!114 &7423650768408514478
 MonoBehaviour:
   m_ObjectHideFlags: 0
