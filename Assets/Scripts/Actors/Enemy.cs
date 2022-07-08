@@ -32,11 +32,14 @@ public abstract class Enemy : Actor {
         if (_target != null && canMove) {
             transform.position = Vector2.MoveTowards(transform.position, _target,
                 movementSpeed * Time.deltaTime);
-
-            Vector2 dir = ((Vector2)transform.position - _target).normalized;
-            if (dir.x > 0.5f && spriteRenderer != null) spriteRenderer.flipX = false;
-            if (dir.x < -0.5f && spriteRenderer != null) spriteRenderer.flipX = true;
         }
+    }
+
+    protected virtual void ChasePlayer() {
+        MoveTowards(target);
+        Vector2 dir = (transform.position - playerTransform.transform.position).normalized;
+        if (dir.x > 0.5f && spriteRenderer != null) spriteRenderer.flipX = false;
+        if (dir.x < -0.5f && spriteRenderer != null) spriteRenderer.flipX = true;
     }
 
     protected void AimAtPlayer() {

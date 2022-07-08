@@ -5,7 +5,7 @@ using UnityEngine;
 public class Moth : Enemy {
     protected override void Update() {
         base.Update();
-        MoveTowards(target);
+        ChasePlayer();
     }
 
     protected override void AttackPlayer() {
