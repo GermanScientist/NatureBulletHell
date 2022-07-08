@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43905300bacbbe4d89f314ccc9c828a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
+  movementSpeed: 4
   collisionOffset: 0.05
   maxHitpoints: 7
   flickerColor: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}

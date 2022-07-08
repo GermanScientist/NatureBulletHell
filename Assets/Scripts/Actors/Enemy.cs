@@ -19,6 +19,10 @@ public abstract class Enemy : Actor {
         AimAtPlayer();
     }
 
+    public virtual void Move(Vector2 _target) {
+        transform.position = Vector2.MoveTowards(transform.position, _target, movementSpeed * Time.deltaTime);
+    }
+
     protected void AimAtPlayer() {
         playerDirection = (playerTransform.position - this.transform.position).normalized;
     }

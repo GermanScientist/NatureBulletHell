@@ -6,13 +6,13 @@ public class Unit : MonoBehaviour {
 	private Vector2[] path;
 	private int targetIndex;
 	private Vector2 direction;
+	private Enemy enemy;
 
 	[SerializeField] private Transform target;
-	[SerializeField] private float speed = 20;
-
 
 	private void Start() {
 		target = GameObject.Find("Player").transform;
+		enemy = GetComponent<Enemy>();
 		InvokeRepeating("ChaseTarget", 0, .5f);
 	}
 
@@ -39,7 +39,8 @@ public class Unit : MonoBehaviour {
 				currentWaypoint = path[targetIndex];
 			}
 
-			transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+			if(enemy != null)
+				enemy.Move(currentWaypoint);
 
 			yield return null;
 

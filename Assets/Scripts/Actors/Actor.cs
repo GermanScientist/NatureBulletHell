@@ -33,7 +33,7 @@ public abstract class Actor : MonoBehaviour {
         projectileSpawn = transform.GetChild(0).transform;
     }
 
-    protected void Move(float _speed, Vector2 _direction) {
+    public virtual void Move(float _speed, Vector2 _direction) {
         currentSpeed = new Vector2(_direction.x * _speed, _direction.y * _speed);
         currentSpeed.Normalize();
         if (currentSpeed.x > 0.5f) GetComponent<SpriteRenderer>().flipX = false;
