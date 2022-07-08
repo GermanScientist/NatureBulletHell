@@ -15,6 +15,8 @@ public class Player : Actor {
     private Animator animator;
     private CameraShake cameraShake;
 
+    public Vector3 MouseDirection { get { return mouseDirection; } }
+
     protected override void Start() {
         base.Start();
 
