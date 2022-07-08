@@ -6,6 +6,9 @@ public class Pickupable : MonoBehaviour {
     private float startingY;
     [SerializeField] private float amplitude;
     [SerializeField] private float speed;
+
+    [SerializeField] private int healAmount = 25;
+    [SerializeField] private int ammoAmount = 45;
  
     // Start is called before the first frame update
     private void Start() {
@@ -25,9 +28,9 @@ public class Pickupable : MonoBehaviour {
         if (_other.gameObject.tag == "Player") {
             Player player = _other.gameObject.GetComponent<Player>();
             if (gameObject.tag == "Health") {
-                player.Heal(7);
+                player.Heal(healAmount);
             } else if (gameObject.tag == "Ammo") {
-                player.Weapon.AddAmmo(45);
+                player.Weapon.AddAmmo(ammoAmount);
             }
             Destroy(gameObject);
         }

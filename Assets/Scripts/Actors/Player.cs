@@ -37,7 +37,7 @@ public class Player : Actor {
     }
 
     private void FixedUpdate() {
-        Move(movementSpeed, moveDirection);
+        MoveTowards(movementSpeed, moveDirection);
         animator.SetInteger("Vertical", (int)(currentSpeed.y * 100));
         if (currentSpeed == Vector2.zero) animator.speed = 0;
         else animator.speed = .5f;

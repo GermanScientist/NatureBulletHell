@@ -175,6 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.03
   speed: 5
+  healAmount: 18
+  ammoAmount: 45
 --- !u!61 &8692478220461901100
 BoxCollider2D:
   m_ObjectHideFlags: 0

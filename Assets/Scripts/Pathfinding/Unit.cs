@@ -18,7 +18,9 @@ public class Unit : MonoBehaviour {
 
 	private void ChaseTarget() {
 		if(target == null) target = GameObject.Find("Player").transform;
-		if(Vector2.Distance(transform.position, target.position) < 40) {
+		if (enemy != null) enemy.CanMove = false;
+
+		if (Vector2.Distance(transform.position, target.position) < enemy.ChaseDistance) {
 			path = Pathfinding.RequestPath(transform.position, target.position);
 			StopCoroutine("FollowPath");
 			StartCoroutine("FollowPath");
@@ -39,11 +41,12 @@ public class Unit : MonoBehaviour {
 				currentWaypoint = path[targetIndex];
 			}
 
-			if(enemy != null)
-				enemy.Move(currentWaypoint);
+			if(enemy != null) {
+				enemy.Target = currentWaypoint;
+				enemy.CanMove = true;
+			}
 
 			yield return null;
-
 		}
 	}
 

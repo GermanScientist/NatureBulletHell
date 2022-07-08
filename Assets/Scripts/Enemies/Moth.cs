@@ -5,11 +5,11 @@ using UnityEngine;
 public class Moth : Enemy {
     protected override void Update() {
         base.Update();
-        //ChasePlayer();
+        MoveTowards(target);
     }
 
     protected override void AttackPlayer() {
-        if (Vector2.Distance(transform.position, playerTransform.position) < 8)
+        if (Vector2.Distance(transform.position, playerTransform.position) < fireRange)
             weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position);
     }
 }

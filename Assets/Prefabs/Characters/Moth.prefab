@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   collisionOffset: 0.05
-  maxHitpoints: 7
+  maxHitpoints: 5
   flickerColor: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}
   movementFilter:
     useTriggers: 0
@@ -149,7 +149,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  fireRate: 0.8
+  fireRate: 0.7
+  chaseDistance: 40
+  fireRange: 8
 --- !u!114 &7423650768408514478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +226,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 4
 --- !u!95 &-2704876559814281321
 Animator:
   serializedVersion: 3
