@@ -31,8 +31,19 @@ public class Weapon : MonoBehaviour {
         //Add the projectile component
         EnemyProjectile p = projectile.AddComponent<EnemyProjectile>();
         p.ProjectileStats = projectileStats;
+    }
 
-        currentAmmo--; //Update the ammo acount
+    public void FireEnemyProjectile(Vector3 _direction, Vector3 _spawnPosition, float _angle, float _coneRadius, int _amount) {
+        for (int i = 0; i < _amount; i++) {
+            GameObject projectile = CreateProjectile(_direction, _spawnPosition);
+            
+            float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+            float randomness = Random.Range(_angle - _coneRadius, _angle + _coneRadius);
+            projectile.transform.rotation = Quaternion.AngleAxis((angle + randomness) - 90f, Vector3.forward);
+
+            EnemyProjectile p = projectile.AddComponent<EnemyProjectile>();
+            p.ProjectileStats = projectileStats;
+        }
     }
 
     private GameObject CreateProjectile(Vector3 _direction, Vector3 _spawnPosition) {

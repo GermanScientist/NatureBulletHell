@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MothProjectile
   m_EditorClassIdentifier: 
   maxAmmo: 20
-  projectileDamage: 3
+  projectileDamage: 1
   projectileSpeed: 0.25
   projectileSpawnDistance: 0
