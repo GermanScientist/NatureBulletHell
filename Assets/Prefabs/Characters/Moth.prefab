@@ -151,7 +151,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   fireRate: 0.7
   chaseDistance: 40
-  fireRange: 8
+  fireRange: 9.5
 --- !u!114 &7423650768408514478
 MonoBehaviour:
   m_ObjectHideFlags: 0

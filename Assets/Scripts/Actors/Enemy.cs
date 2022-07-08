@@ -6,6 +6,7 @@ public abstract class Enemy : Actor {
     [SerializeField] protected float fireRate = 1f;
     [SerializeField] protected float chaseDistance = 40f;
     [SerializeField] protected float fireRange = 8;
+    [SerializeField] protected float hoverDistance = 8.5f;
 
     protected Vector3 playerDirection;
     protected Vector2 target;

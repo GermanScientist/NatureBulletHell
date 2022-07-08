@@ -5,7 +5,8 @@ using UnityEngine;
 public class Chimora : Enemy {
     protected override void Update() {
         base.Update();
-        ChasePlayer();
+        if (Vector2.Distance(transform.position, playerTransform.position) >= hoverDistance)
+            ChasePlayer();
     }
 
     protected override void AttackPlayer() {

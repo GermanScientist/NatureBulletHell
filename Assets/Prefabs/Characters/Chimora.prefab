@@ -122,6 +122,7 @@ MonoBehaviour:
   fireRate: 0.35
   chaseDistance: 40
   fireRange: 8
+  hoverDistance: 1
 --- !u!114 &5695662099166449104
 MonoBehaviour:
   m_ObjectHideFlags: 0
