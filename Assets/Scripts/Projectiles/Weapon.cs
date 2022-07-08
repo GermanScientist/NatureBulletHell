@@ -33,6 +33,21 @@ public class Weapon : MonoBehaviour {
         p.ProjectileStats = projectileStats;
     }
 
+    public void FireEnemyProjectile(Vector3 _direction, Vector3 _spawnPosition, float _time) {
+        GameObject projectile = CreateProjectile(_direction, _spawnPosition);
+
+        //Add the projectile component
+        EnemyProjectile p = projectile.AddComponent<EnemyProjectile>();
+        p.ProjectileStats = projectileStats;
+
+        StartCoroutine(DestroyAfterSeconds(projectile, _time));
+    }
+
+    private IEnumerator DestroyAfterSeconds(GameObject _projectile, float _seconds) {
+        yield return new WaitForSeconds(_seconds);
+        Destroy(_projectile);
+    }
+
     public void FireEnemyProjectile(Vector3 _direction, Vector3 _spawnPosition, float _angle, float _coneRadius, int _amount) {
         for (int i = 0; i < _amount; i++) {
             GameObject projectile = CreateProjectile(_direction, _spawnPosition);

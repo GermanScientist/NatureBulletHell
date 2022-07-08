@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chimora : Enemy {
+    [SerializeField] private float projectileLifespan = 1.5f;
+
     protected override void Update() {
         base.Update();
         if (Vector2.Distance(transform.position, playerTransform.position) >= hoverDistance)
@@ -11,6 +13,6 @@ public class Chimora : Enemy {
 
     protected override void AttackPlayer() {
         if (Vector2.Distance(transform.position, playerTransform.position) < fireRange)
-            weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position);
+            weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position, projectileLifespan);
     }
 }

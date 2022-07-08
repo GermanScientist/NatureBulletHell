@@ -683,7 +683,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: -10}
   smoothTime: 0.4
+  mouseDirectionAmplifier: 4.3
   target: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &1275184841
 Transform:
   m_ObjectHideFlags: 0

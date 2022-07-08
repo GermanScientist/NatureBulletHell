@@ -123,6 +123,7 @@ MonoBehaviour:
   chaseDistance: 40
   fireRange: 15
   hoverDistance: 1
+  projectileLifespan: 0.8
 --- !u!114 &5695662099166449104
 MonoBehaviour:
   m_ObjectHideFlags: 0
