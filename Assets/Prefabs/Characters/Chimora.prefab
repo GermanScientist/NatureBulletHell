@@ -119,11 +119,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  fireRate: 0.35
+  fireRate: 0.4
   chaseDistance: 40
-  fireRange: 15
+  fireRange: 30
   hoverDistance: 1
-  projectileLifespan: 0.8
+  projectileLifespan: 0.6
 --- !u!114 &5695662099166449104
 MonoBehaviour:
   m_ObjectHideFlags: 0

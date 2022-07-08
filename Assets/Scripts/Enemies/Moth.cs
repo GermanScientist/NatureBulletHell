@@ -11,6 +11,7 @@ public class Moth : Enemy {
         base.Update();
         if (Vector2.Distance(transform.position, playerTransform.position) >= hoverDistance)
             ChasePlayer();
+        
     }
 
     protected override void AttackPlayer() {
