@@ -120,7 +120,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   fireRate: 0.4
-  chaseDistance: 40
+  chaseDistance: 20
   fireRange: 30
   hoverDistance: 1
   projectileLifespan: 0.6
