@@ -19,6 +19,7 @@ public abstract class Actor : MonoBehaviour {
     protected Vector2 moveDirection;
     protected Transform projectileSpawn;
     protected Vector2 currentSpeed;
+    protected SpriteRenderer spriteRenderer;
 
     public int Hitpoints { get { return currentHitpoints; } }
     public Weapon Weapon { get { return weapon; } }
@@ -28,6 +29,7 @@ public abstract class Actor : MonoBehaviour {
         rb.isKinematic = true;
 
         weapon = GetComponent<Weapon>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         currentHitpoints = maxHitpoints;
         projectileSpawn = transform.GetChild(0).transform;
@@ -36,9 +38,8 @@ public abstract class Actor : MonoBehaviour {
     public virtual void MoveTowards(float _speed, Vector2 _direction) {
         currentSpeed = new Vector2(_direction.x * _speed, _direction.y * _speed);
         currentSpeed.Normalize();
-        if (currentSpeed.x > 0.5f) GetComponent<SpriteRenderer>().flipX = false;
-        if (currentSpeed.x < -0.5f) GetComponent<SpriteRenderer>().flipX = true;
-        Debug.Log(currentSpeed);
+        if (currentSpeed.x > 0.5f) spriteRenderer.flipX = false;
+        if (currentSpeed.x < -0.5f) spriteRenderer.flipX = true;
 
         bool succes = CheckToMove(_direction, _speed); //Try to move, move if there is no collision
         if (!succes) { //If there is no collision, allowing the player to move...

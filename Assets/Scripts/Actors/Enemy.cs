@@ -29,9 +29,13 @@ public abstract class Enemy : Actor {
     }
 
     public virtual void MoveTowards(Vector2 _target) {
-        if(_target != null && canMove) {
+        if (_target != null && canMove) {
             transform.position = Vector2.MoveTowards(transform.position, _target,
                 movementSpeed * Time.deltaTime);
+
+            Vector2 dir = ((Vector2)transform.position - _target).normalized;
+            if (dir.x > 0.5f && spriteRenderer != null) spriteRenderer.flipX = false;
+            if (dir.x < -0.5f && spriteRenderer != null) spriteRenderer.flipX = true;
         }
     }
 
