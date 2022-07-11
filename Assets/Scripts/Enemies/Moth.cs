@@ -6,7 +6,12 @@ public class Moth : Enemy {
     [SerializeField] private int shotgunPallets = 3;
     [SerializeField] private float palletAngle = 8;
     [SerializeField] private float palletCone = 35;
-    
+
+    protected override void Start() {
+        base.Start();
+        firingSound = GameObject.Find("mothFire").GetComponent<AudioSource>();
+    }
+
     protected override void Update() {
         base.Update();
         if (Vector2.Distance(transform.position, playerTransform.position) >= hoverDistance)
@@ -16,6 +21,7 @@ public class Moth : Enemy {
 
     protected override void AttackPlayer() {
         if (Vector2.Distance(transform.position, playerTransform.position) < fireRange) {
+            firingSound.Play();
             weapon.FireEnemyProjectile(playerDirection, projectileSpawn.position, 
                 palletAngle, palletCone, shotgunPallets);
         }

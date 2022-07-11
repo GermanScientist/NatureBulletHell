@@ -9,13 +9,15 @@ public abstract class Actor : MonoBehaviour {
     [SerializeField] protected float collisionOffset = 0.05f;
     [SerializeField] protected int maxHitpoints;
     [SerializeField] protected Color flickerColor;
-    
+    [SerializeField] protected AudioSource firingSound;
+
     protected int currentHitpoints;
 
     protected Rigidbody2D rb;
     protected Weapon weapon;
     private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     public ContactFilter2D movementFilter;
+
     protected Vector2 moveDirection;
     protected Transform projectileSpawn;
     protected Vector2 currentSpeed;

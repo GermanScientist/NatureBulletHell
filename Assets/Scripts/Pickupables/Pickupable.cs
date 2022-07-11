@@ -9,10 +9,13 @@ public class Pickupable : MonoBehaviour {
 
     [SerializeField] private int healAmount = 25;
     [SerializeField] private int ammoAmount = 45;
+
+    private AudioSource pickupSound;
  
     // Start is called before the first frame update
     private void Start() {
         startingY = transform.position.y;
+        pickupSound = GameObject.Find("pickupSound").GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -26,6 +29,7 @@ public class Pickupable : MonoBehaviour {
 
     public virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.gameObject.tag == "Player") {
+            pickupSound.Play();
             Player player = _other.gameObject.GetComponent<Player>();
             if (gameObject.tag == "Health") {
                 player.Heal(healAmount);

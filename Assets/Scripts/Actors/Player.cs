@@ -15,10 +15,15 @@ public class Player : Actor {
     private Animator animator;
     private CameraShake cameraShake;
 
+    private AudioSource playerHitSound;
+
     public Vector3 MouseDirection { get { return mouseDirection; } }
 
     protected override void Start() {
         base.Start();
+
+        firingSound = GameObject.Find("mothFire").GetComponent<AudioSource>();
+        playerHitSound = GameObject.Find("playerHit").GetComponent<AudioSource>();
 
         Cursor.lockState = CursorLockMode.Confined;
         
@@ -64,7 +69,12 @@ public class Player : Actor {
         if (weapon.CurrentAmmo <= 0) return;
         if (!Input.GetMouseButtonDown(0)) return;
 
-        weapon.FireFriendlyProjectile(mouseDirection, projectileSpawn.position); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
+        Fire(); //Only fire a projectile when the player has ammo and the mousebutton has been pressed
+    }
+
+    private void Fire() {
+        firingSound.Play();
+        weapon.FireFriendlyProjectile(mouseDirection, projectileSpawn.position); 
         ammoText.text = weapon.CurrentAmmo.ToString();
         StartCoroutine(cameraShake.Shake(.1f, .15f));
     }
@@ -73,6 +83,7 @@ public class Player : Actor {
         base.Damage(_damageAmount);
         healthbar.value = (float)currentHitpoints / (float)maxHitpoints;
         StartCoroutine(cameraShake.Shake(.30f, .20f));
+        playerHitSound.Play();
     }
 
     public void Heal(int _healAmount) {
