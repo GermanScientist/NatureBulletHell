@@ -135,6 +135,7 @@ MonoBehaviour:
   collisionOffset: 0.05
   maxHitpoints: 4
   flickerColor: {r: 1, g: 0.6367924, b: 0.6367924, a: 1}
+  firingSound: {fileID: 0}
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -153,8 +154,8 @@ MonoBehaviour:
   chaseDistance: 40
   fireRange: 12
   hoverDistance: 7.5
-  shotgunPallets: 5
-  palletAngle: 10
+  shotgunPallets: 4
+  palletAngle: 15
   palletCone: 40
 --- !u!114 &7423650768408514478
 MonoBehaviour:
