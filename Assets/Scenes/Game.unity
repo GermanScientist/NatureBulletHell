@@ -895,7 +895,7 @@ MonoBehaviour:
   gridWidth: 10
   gridHeight: 10
   cellSize: 70
-  numberOfRooms: 100
+  numberOfRooms: 10
   roomPrefabs:
   - {fileID: 2680033742756922263, guid: 7dfaa74dbeae1f6468dfb01decbf05a2, type: 3}
   - {fileID: 9146819371058240326, guid: 01d3d3d522feac347a3b463594d0cc80, type: 3}
